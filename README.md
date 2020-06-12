@@ -1,5 +1,7 @@
 ## Locker
 
+[![Locker Build status](https://circleci.com/gh/Fatezhang/Locker.svg?style=svg)](https://app.circleci.com/pipelines/github/Fatezhang/Locker/)
+
 A simple project to practice TDD.
 
 ## Task
