@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh -eu
+
+echo "Test start... ..."
+cd $(dirname $0)/..
+./gradlew clean test

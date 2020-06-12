@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "5.1.0"
+}
+
+project(":") {
+    group = 'com.tw'
+    version = '1.0'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    lombok {
+        version = "1.18.12"
+    }
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+    }
+
+    dependencies {
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
+        testImplementation 'org.assertj:assertj-core:3.16.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
