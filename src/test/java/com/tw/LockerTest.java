@@ -51,4 +51,21 @@ public class LockerTest {
 
         assertThatThrownBy(()->locker.store(bag3)).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    public void shouldGetBagSuccessWhenGetBagGivenValidTicketAndLockerWithSpecificBag() {
+        var locker = Locker.builder().capacity(2).build();
+        var bag1Id = 1;
+        var bag2Id = 2;
+        var bag1 = Bag.builder().id(bag1Id).build();
+        var bag2 = Bag.builder().id(bag2Id).build();
+        var ticket = Ticket.builder().bagId(bag1Id).build();
+
+        locker.store(bag1);
+        locker.store(bag2);
+
+        var bag = locker.getBag(ticket);
+
+        assertThat(bag).isEqualTo(bag1);
+    }
 }
