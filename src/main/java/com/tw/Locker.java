@@ -13,23 +13,23 @@ public class Locker {
 
     public Ticket store(Bag bag) {
         checkCapacity();
-        Optional.ofNullable(bagMap.get(bag.getId())).ifPresent(oldBag -> {
-            throw new RuntimeException("Bag has benn stored");
-        });
-        capacity--;
+        if (bagMap.containsKey(bag.getId())) {
+            throw new RuntimeException("Bag has been stored");
+        }
         bagMap.put(bag.getId(), bag);
         return Ticket.builder().bagId(bag.getId()).build();
     }
 
     private void checkCapacity() {
-        if (capacity == 0) {
+        if (capacity == bagMap.size()) {
             throw new RuntimeException("Locker has already full");
         }
     }
 
     public Bag getBag(Ticket ticket) {
-        var bag = Optional.ofNullable(bagMap.get(ticket.getBagId())).orElseThrow(RuntimeException::new);
-        bagMap.put(bag.getId(), null);
-        return bag;
+        if (!bagMap.containsKey(ticket.getBagId())) {
+            throw new RuntimeException("Ticket is invalid!");
+        }
+        return bagMap.remove(ticket.getBagId());
     }
 }
