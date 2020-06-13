@@ -53,6 +53,19 @@ public class LockerTest {
     }
 
     @Test
+    public void shouldThrowExceptionWhenStoreGivenLockerAndStoredBag() {
+        var locker = Locker.builder().capacity(2).build();
+        var bag1Id = 1;
+        var bag2Id = 1;
+        var bag1 = Bag.builder().id(bag1Id).build();
+        var bag2 = Bag.builder().id(bag2Id).build();
+
+        locker.store(bag1);
+
+        assertThatThrownBy(() -> locker.store(bag2)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     public void shouldGetBagSuccessWhenGetBagGivenValidTicketAndLockerWithSpecificBag() {
         var locker = Locker.builder().capacity(2).build();
         var bag1Id = 1;
