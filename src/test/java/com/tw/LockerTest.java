@@ -84,4 +84,13 @@ public class LockerTest {
 
         assertThatThrownBy(() -> locker.getBag(ticket)).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    public void shouldThrowExceptionWhenGetBagGivenInvalidTicketAndEmptyLocker() {
+        var locker = Locker.builder().capacity(2).build();
+        var invalidBagId = 1;
+        var ticket = Ticket.builder().bagId(invalidBagId).build();
+
+        assertThatThrownBy(() -> locker.getBag(ticket)).isInstanceOf(RuntimeException.class);
+    }
 }
