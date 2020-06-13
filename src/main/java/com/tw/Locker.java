@@ -24,7 +24,8 @@ public class Locker {
     }
 
     public Bag getBag(Ticket ticket) {
-        var bag = bagMap.get(ticket.getBagId());
-        return Optional.ofNullable(bag).orElseThrow(RuntimeException::new);
+        var bag = Optional.ofNullable(bagMap.get(ticket.getBagId())).orElseThrow(RuntimeException::new);
+        bagMap.put(bag.getId(), null);
+        return bag;
     }
 }
