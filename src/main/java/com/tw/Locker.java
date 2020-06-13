@@ -4,6 +4,7 @@ import lombok.Builder;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Builder
 public class Locker {
@@ -20,6 +21,7 @@ public class Locker {
     }
 
     public Bag getBag(Ticket ticket) {
-        return bagMap.get(ticket.getBagId());
+        var bag = bagMap.get(ticket.getBagId());
+        return Optional.ofNullable(bag).orElseThrow(RuntimeException::new);
     }
 }
